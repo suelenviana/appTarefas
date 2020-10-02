@@ -3,10 +3,10 @@
     <ion-title text-center>
      Aplicativo de Tarefas
     </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="openModal()">
+    <ion-buttons>
+      <ion-button (click)="openModal()">
         <ion-icon name="add"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-card>
 </ion-header>
@@ -20,9 +20,9 @@
             <p>Agendado para: {{tarefa.data}}</p>
           </ion-label>
           <ion-checkbox slot="start" color="primary"></ion-checkbox>
-        <button (click)="deletar(tarefa)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
+        <ion-button (click)="deletar(tarefa)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
   </ion-content>
