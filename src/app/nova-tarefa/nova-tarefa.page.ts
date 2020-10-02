@@ -22,11 +22,20 @@ export class NovaTarefaPage implements OnInit {
     
     criarTarefa = () => {
         const id = new Date().getTime();
+
+        const ano = this.data.substring(0, 4)
+        const mes = this.data.substring(5, 7)
+        const dia = this.data.substring(8, 10)
+        const hora = this.data.substring(11, 13)
+        const min = this.data.substring(14, 16)
+        
+        const dataFormatada = `${dia}/${mes}/${ano} ${hora}:${min}`
+
         this.modalCtrl.dismiss({
             id: id, 
             nomeTarefa: this.nomeTarefa, 
             descricaoTarefa: this.descricaoTarefa, 
-            data: this.data
+            data: dataFormatada
         })
     }
 

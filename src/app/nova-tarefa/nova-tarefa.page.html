@@ -10,9 +10,9 @@
     <ion-card id="novaTarefa">
       <ion-card-content>
         <ion-label>Nome da Tarefa</ion-label>
-        <ion-input placeholder="Nome da tarefa..."></ion-input>
+        <ion-input placeholder="Nome da tarefa..." [(ngModel)]="nomeTarefa"></ion-input>
         <ion-label>Descrição da Tarefa</ion-label>
-        <ion-input placeholder="Descrição da Tarefa...">
+        <ion-input placeholder="Descrição da Tarefa..." [(ngModel)]="descricaoTarefa">
         </ion-input>
         <ion-label>Lembrar as:</ion-label>
         <ion-item>
