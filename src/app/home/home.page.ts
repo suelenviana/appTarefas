@@ -1,6 +1,6 @@
 import { NovaTarefaPage } from './../nova-tarefa/nova-tarefa.page';
 import { ModalController, NavController } from '@ionic/angular';
-
+import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,10 +11,18 @@ import { Component } from '@angular/core';
 
 export class HomePage {
 
-  tarefas: any [];
+  tarefas: any = [];
 
-  constructor(public navCtrl: NavController,public modalCtrl: ModalController) {
-
+  constructor(
+      public navCtrl: NavController,
+      public modalCtrl: ModalController,
+      private storage: Storage) {
+    this.storage.get('tarefas')
+    .then(t => {
+        if (t) {
+            this.tarefas = t
+        }
+    })
   }
 
   async openModal() {
@@ -22,7 +30,19 @@ export class HomePage {
       component: NovaTarefaPage,
       cssClass: 'novaTarefa.page.scss'
     });
-    return await modal.present();
+    await modal.present();
+    modal.onDidDismiss()
+    .then(async res => {
+        if (res.data) {
+            this.tarefas.push(res.data)
+            this.storage.set('tarefas', this.tarefas)
+        }
+    })
+  }
+
+  deletar(tarefa) {
+    this.tarefas = this.tarefas.filter((t) => t !== tarefa);
+    this.storage.set('tarefas', this.tarefas);
   }
 
 }

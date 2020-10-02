@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController, NavParams, ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-nova-tarefa',
@@ -7,7 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NovaTarefaPage implements OnInit {
 
-  constructor() { }
+    nomeTarefa = '';
+    descricaoTarefa = '';
+    data = null;
+
+    constructor(
+        private modalCtrl: ModalController,
+        public navCtrl: NavController,
+        public navParam: NavParams,
+        private storage: Storage
+    ) { }
+    
+    criarTarefa = () => {
+        const id = new Date().getTime();
+        this.modalCtrl.dismiss({
+            id: id, 
+            nomeTarefa: this.nomeTarefa, 
+            descricaoTarefa: this.descricaoTarefa, 
+            data: this.data
+        })
+    }
+
+    cancelar = () => {
+        this.modalCtrl.dismiss();
+    }
 
   ngOnInit() {
   }
