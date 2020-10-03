@@ -10,5 +10,23 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-card id="editarTarefa">
+      <ion-card-content>
+        <ion-label>Nome da Tarefa</ion-label>
+        <ion-input placeholder="Nome da tarefa..." [(ngModel)]="tarefa.nomeTarefa"></ion-input>
+        <ion-label>Descrição da Tarefa</ion-label>
+        <ion-input placeholder="Descrição da Tarefa..." [(ngModel)]="tarefa.descricaoTarefa">
+        </ion-input>
+        <ion-label>Lembrar as:</ion-label>
+        <ion-item>
+          <ion-icon name="calendar"> </ion-icon>
+          <ion-datetime [(ngModel)]="tarefa.timestamp" displayFormat="D MMM YYYY H:mm" min="2019" max="2050" value="2020-10-08T11:06Z" pickerFormat="DD MMM YYYY HH:mm"></ion-datetime>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  <ion-fab id="btSalvar" horizontal="end">
+    <ion-fab-button (click)="salvar()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

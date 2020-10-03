@@ -32,12 +32,10 @@ export class NovaTarefaPage implements OnInit {
 
     criarTarefa = () => {
         if (this.nomeTarefa && this.descricaoTarefa && this.data) {
-            const id = new Date().getTime();
 
             const dataFormatada = this.formataData(this.data)
 
             this.modalCtrl.dismiss({
-                id: id, 
                 nomeTarefa: this.nomeTarefa, 
                 descricaoTarefa: this.descricaoTarefa, 
                 data: dataFormatada,

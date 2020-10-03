@@ -29,9 +29,17 @@ export class HomePage {
   async openModalEditar(tarefa) {
     const modal = await this.modalCtrl.create({
         component: EditarTarefaPage,
+        componentProps: { tarefa },
         cssClass: 'novaTarefa.page.scss'
       });
       await modal.present();
+      modal.onDidDismiss()
+    .then(async res => {
+        if (res.data) {
+            console.log(res.data)
+            this.storage.set('tarefas', this.tarefas)
+        }
+    })
   }
 
   async openModal() {
