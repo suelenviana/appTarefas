@@ -1,14 +1,14 @@
 <ion-header>
-  <ion-card id="cardTitulo"color="primary">
-    <ion-title text-center>
+  <ion-toolbar class="toolbarHome">
+    <ion-title>
      Aplicativo de Tarefas
     </ion-title>
-    <ion-buttons>
-      <ion-button (click)="openModal()">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
+    <ion-buttons slot="end">
+        <ion-button (click)="openModal()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
     </ion-buttons>
-  </ion-card>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -21,6 +21,9 @@
           </ion-label>
           <ion-checkbox slot="start" color="primary"></ion-checkbox>
           <ion-buttons>
+            <ion-button (click)="openModalEditar(tarefa)">
+                <ion-icon slot="icon-only" color="tertiary" name="create"></ion-icon>
+            </ion-button>
             <ion-button (click)="deletar(tarefa)">
                 <ion-icon slot="icon-only" color="danger" name="trash"></ion-icon>
             </ion-button>
