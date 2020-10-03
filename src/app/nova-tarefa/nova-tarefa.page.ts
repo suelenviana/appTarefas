@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-nova-tarefa',
@@ -17,8 +16,7 @@ export class NovaTarefaPage implements OnInit {
         private modalCtrl: ModalController,
         public navCtrl: NavController,
         public alertCtrl: AlertController,
-        public navParam: NavParams,
-        private storage: Storage
+        public navParam: NavParams
     ) { }
     
     async presentAlert() {
@@ -35,7 +33,7 @@ export class NovaTarefaPage implements OnInit {
     criarTarefa = () => {
         if (this.nomeTarefa && this.descricaoTarefa && this.data) {
             const id = new Date().getTime();
-            
+
             const dataFormatada = this.formataData(this.data)
 
             this.modalCtrl.dismiss({

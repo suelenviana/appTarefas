@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'nova-tarefa',
     loadChildren: () => import('./nova-tarefa/nova-tarefa.module').then( m => m.NovaTarefaPageModule)
+  },  {
+    path: 'editar-tarefa',
+    loadChildren: () => import('./editar-tarefa/editar-tarefa.module').then( m => m.EditarTarefaPageModule)
   },
+
 ];
 
 @NgModule({

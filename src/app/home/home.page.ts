@@ -1,4 +1,5 @@
 import { NovaTarefaPage } from './../nova-tarefa/nova-tarefa.page';
+import { EditarTarefaPage } from './../editar-tarefa/editar-tarefa.page';
 import { ModalController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
@@ -23,6 +24,14 @@ export class HomePage {
             this.tarefas = t
         }
     })
+  }
+
+  async openModalEditar(tarefa) {
+    const modal = await this.modalCtrl.create({
+        component: EditarTarefaPage,
+        cssClass: 'novaTarefa.page.scss'
+      });
+      await modal.present();
   }
 
   async openModal() {
