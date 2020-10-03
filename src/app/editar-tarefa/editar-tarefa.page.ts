@@ -23,11 +23,26 @@ export class EditarTarefaPage implements OnInit {
   ngOnInit() {
   }
 
-  salvar = () => {
-      this.tarefa.data = this.formataData(this.tarefa.timestamp)
-    this.modalCtrl.dismiss({
-        ...this.tarefa
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Atenção!',
+      message: 'Você precisa preencher todos os campos!',
+      buttons: ['OK']
     });
+
+    await alert.present();
+  }
+
+  salvar = () => {
+    if (this.tarefa.nomeTarefa && this.tarefa.descricaoTarefa && this.tarefa.timestamp) {
+      this.tarefa.data = this.formataData(this.tarefa.timestamp)
+      this.modalCtrl.dismiss({
+        ...this.tarefa
+      });
+    } else {
+        this.presentAlert();
+    }
   }
 
   cancelar = () => {

@@ -36,7 +36,6 @@ export class HomePage {
       modal.onDidDismiss()
     .then(async res => {
         if (res.data) {
-            console.log(res.data)
             this.storage.set('tarefas', this.tarefas)
         }
     })
