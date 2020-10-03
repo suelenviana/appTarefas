@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ModalController } from '@ionic/angular';
+import { NavController, NavParams, ModalController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -16,31 +16,52 @@ export class NovaTarefaPage implements OnInit {
     constructor(
         private modalCtrl: ModalController,
         public navCtrl: NavController,
+        public alertCtrl: AlertController,
         public navParam: NavParams,
         private storage: Storage
     ) { }
     
+    async presentAlert() {
+        const alert = await this.alertCtrl.create({
+          cssClass: 'my-custom-class',
+          header: 'Atenção!',
+          message: 'Você precisa preencher todos os campos!',
+          buttons: ['OK']
+        });
+    
+        await alert.present();
+      }
+
     criarTarefa = () => {
-        const id = new Date().getTime();
+        if (this.nomeTarefa && this.descricaoTarefa && this.data) {
+            const id = new Date().getTime();
+            
+            const dataFormatada = this.formataData(this.data)
 
-        const ano = this.data.substring(0, 4)
-        const mes = this.data.substring(5, 7)
-        const dia = this.data.substring(8, 10)
-        const hora = this.data.substring(11, 13)
-        const min = this.data.substring(14, 16)
-        
-        const dataFormatada = `${dia}/${mes}/${ano} ${hora}:${min}`
-
-        this.modalCtrl.dismiss({
-            id: id, 
-            nomeTarefa: this.nomeTarefa, 
-            descricaoTarefa: this.descricaoTarefa, 
-            data: dataFormatada
-        })
+            this.modalCtrl.dismiss({
+                id: id, 
+                nomeTarefa: this.nomeTarefa, 
+                descricaoTarefa: this.descricaoTarefa, 
+                data: dataFormatada,
+                timestamp: this.data
+            })
+        } else {
+            this.presentAlert();
+        }
     }
 
     cancelar = () => {
         this.modalCtrl.dismiss();
+    }
+
+    formataData = (data) => {
+        const ano = data.substring(0, 4)
+        const mes = data.substring(5, 7)
+        const dia = data.substring(8, 10)
+        const hora = data.substring(11, 13)
+        const min = data.substring(14, 16)
+        const dataFormatada = `${dia}/${mes}/${ano} ${hora}:${min}`
+        return dataFormatada
     }
 
   ngOnInit() {
